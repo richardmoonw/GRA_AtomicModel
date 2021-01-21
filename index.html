@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Model</title>
+
+    <!-- Import Threejs -->
+    <script type="text/javascript" src="three.js-master/build/three.js"></script>
+</head>
+<body>
+    <!-- Some fragments of code were retrieved from the following sources: -->
+    <!-- 1. https://www.youtube.com/channel/UCC7y8uQQXtSxXDGle76HAxw -->
+    <script>
+        // Create the scene
+        var scene = new THREE.Scene();
+
+        // Add a texture to the background
+        const loader = new THREE.TextureLoader();
+        loader.load("./textures/background.jpg", (texture) => {
+            scene.background = texture;
+        })
+
+        // Add a Perspective Camera
+        var camera = new THREE.PerspectiveCamera(
+            75,                                       // Field of View
+            window.innerWidth/window.innerHeight,     // Aspect ratio
+            0.1,                                      // Near (default value)
+            2000                                      // Far (default value)
+        );
+
+        // Renderer
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Add geometry
+        var geometry = new THREE.BoxGeometry();
+        var material = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+        var cube = new THREE.Mesh(geometry, material);
+
+        cube.position.z = -5;
+
+        scene.add(cube);
+
+        // camera.position.z = ;
+
+        var i = 0;
+
+        // Create an animation
+        var animate = function() {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+
+</body>
+</html>
