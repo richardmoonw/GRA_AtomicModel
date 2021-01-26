@@ -18,9 +18,14 @@
     <script>
         // Create the scene
         var scene = new THREE.Scene();
+
+        // Axes
         const axesHelper = new THREE.AxesHelper(15);
         scene.add(axesHelper);
-
+        
+        const light = new THREE.PointLight( 0xffffff, 10, 2);
+        light.position.set( 0, 20, 0 );
+        scene.add( light );
         var theta = 0;
 
         // Add a texture to the background
