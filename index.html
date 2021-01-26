@@ -9,11 +9,19 @@
     <script type="text/javascript" src="three.js-master/build/three.js"></script>
 </head>
 <body>
+
     <!-- Some fragments of code were retrieved from the following sources: -->
     <!-- 1. https://www.youtube.com/channel/UCC7y8uQQXtSxXDGle76HAxw -->
+    <!-- 2. https://stackoverflow.com/questions/13039589/rotate-the-camera-around-an-object-using-the-arrow-keys-in-three-js -->
+    <!-- 3. https://stackoverflow.com/questions/29202091/three-js-keyboard-rotation -->
+
     <script>
         // Create the scene
         var scene = new THREE.Scene();
+        const axesHelper = new THREE.AxesHelper(15);
+        scene.add(axesHelper);
+
+        var theta = 0;
 
         // Add a texture to the background
         const loader = new THREE.TextureLoader();
@@ -29,33 +37,154 @@
             2000                                      // Far (default value)
         );
 
+        camera.position.z = 100;
+
         // Renderer
         var renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        // Add geometry
-        var geometry = new THREE.BoxGeometry();
-        var material = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
-        var cube = new THREE.Mesh(geometry, material);
+        // Create the protons
+        loader.load("./textures/proton.jpg", texture => {
+            const proton_geometry = new THREE.SphereGeometry(5, 50, 50);
+            const proton_material = new THREE.MeshBasicMaterial({ map: texture });
 
-        cube.position.z = -5;
+            const proton_1 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_2 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_3 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_4 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_5 = new THREE.Mesh(proton_geometry, proton_material);
 
-        scene.add(cube);
+            proton_1.position.x = 0;
+            proton_1.position.y = 2 * 5 * Math.cos(Math.PI / 4);
+            proton_1.position.z = 0;
 
-        // camera.position.z = ;
+            proton_2.position.x = 0;
+            proton_2.position.y = 0;
+            proton_2.position.z = 2 * 5 * Math.cos(Math.PI / 4);
 
-        var i = 0;
+            proton_3.position.x = 2 * 5 * Math.cos(Math.PI / 4);
+            proton_3.position.y = 0;
+            proton_3.position.z = 0;
+
+            scene.add(proton_1);
+            scene.add(proton_2);
+            scene.add(proton_3);
+        });
+        
+        // Create the neutrons
+        loader.load("./textures/neutron.jpg", texture => {
+            const neutron_geometry = new THREE.SphereGeometry(5, 50, 50);
+            const neutron_material = new THREE.MeshBasicMaterial({ map: texture });
+
+            const neutron_1 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_2 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_3 = new THREE.Mesh(neutron_geometry, neutron_material); 
+
+            neutron_1.position.x = 0;
+            neutron_1.position.y = - 2 * 5 * Math.cos(Math.PI / 4);
+            neutron_1.position.z = 0;
+
+            neutron_2.position.x = 0;
+            neutron_2.position.y = 0;
+            neutron_2.position.z = - 2 * 5 * Math.cos(Math.PI / 4);
+
+            neutron_3.position.x = - 2 * 5 * Math.cos(Math.PI / 4);
+            neutron_3.position.y = 0;
+            neutron_3.position.z = 0;
+
+            scene.add(neutron_1);
+            scene.add(neutron_2);
+            scene.add(neutron_3);
+        });
+
+        // renderer.render(scene, camera);
 
         // Create an animation
         var animate = function() {
             requestAnimationFrame(animate);
 
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+            if (window.isLeftDown) {
+                camera.position.x = - 100 * Math.cos(theta);
+                camera.position.y = camera.position.y;
+                camera.position.z = - 100 * Math.sin(theta);
+            }
+
+            else if (window.isRightDown) {
+                camera.position.x = 100 * Math.cos(theta);
+                camera.position.y = camera.position.y;
+                camera.position.z = 100 * Math.sin(theta);
+            }
+
+            else if (window.isUpDown) {
+                camera.position.x = camera.position.x; 
+                camera.position.y = 100 * Math.sin(theta);
+                camera.position.z = 100 * Math.cos(theta);
+            }
+
+            else if (window.isDownDown) {
+                camera.position.x = camera.position.x; 
+                camera.position.y = - 100 * Math.sin(theta);
+                camera.position.z = - 100 * Math.cos(theta);
+            }
+
+            camera.lookAt(scene.position);
 
             renderer.render(scene, camera);
         }
+
+        // Key listeners
+        function handleKeyDown(event) {
+            // Left arrow pressed
+            if (event.keyCode === 37) {
+                theta += 1;
+                window.isLeftDown = true;
+            }
+
+            // Right arrow pressed
+            else if (event.keyCode === 39) {
+                theta -= 1;
+                window.isRightDown = true;
+            }
+
+            // Up arrow pressed
+            else if (event.keyCode === 38) {
+                theta += 1;
+                window.isUpDown = true;
+            }
+
+            // Down arrow pressed
+            else if (event.keyCode === 40) {
+                theta -= 1;
+                window.isDownDown = true;
+            }
+        }
+
+        function handleKeyUp(event) {
+            // Left arrow released
+            if (event.keyCode === 37) {
+                window.isLeftDown = false;
+            }
+
+            // Right arrow released
+            else if (event.keyCode === 39) {
+                window.isRightDown = false;
+            }
+
+            // Up arrow released
+            else if (event.keyCode === 38) {
+                window.isUpDown = false;
+            }
+
+            // Down arrow released
+            else if (event.keyCode === 40) {
+                window.isDownDown = false;
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown, false);
+        window.addEventListener('keyup', handleKeyUp, false);
+        
 
         animate();
     </script>
