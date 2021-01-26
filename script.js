@@ -15,4 +15,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
 
+window.addEventListener('resize', () => {
+    //Resize screen
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectMatrix();
+})
+
 renderer.render(scene, camera);
