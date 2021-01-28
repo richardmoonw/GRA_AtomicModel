@@ -20,10 +20,6 @@
     <script>
         // Create the scene
         var scene = new THREE.Scene();
-
-        // Axes
-        const axesHelper = new THREE.AxesHelper(15);
-        scene.add(axesHelper);
         
         const light = new THREE.PointLight( 0xffffff, 10, 2);
         light.position.set( 0, 20, 0 );
@@ -44,7 +40,7 @@
             2000                                      // Far (default value)
         );
 
-        camera.position.z = 100;
+        camera.position.z = 75;
 
         // Renderer
         var renderer = new THREE.WebGLRenderer();
@@ -53,7 +49,8 @@
 
         // Create the protons
         loader.load("./textures/proton.jpg", texture => {
-            const proton_geometry = new THREE.SphereGeometry(5, 50, 50);
+            const radius = 1.5;
+            const proton_geometry = new THREE.SphereGeometry(radius, 50, 50);
             const proton_material = new THREE.MeshBasicMaterial({ map: texture });
 
             const proton_1 = new THREE.Mesh(proton_geometry, proton_material);
@@ -61,148 +58,273 @@
             const proton_3 = new THREE.Mesh(proton_geometry, proton_material);
             const proton_4 = new THREE.Mesh(proton_geometry, proton_material);
             const proton_5 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_6 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_7 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_8 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_9 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_10 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_11 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_12 = new THREE.Mesh(proton_geometry, proton_material);
+            const proton_13 = new THREE.Mesh(proton_geometry, proton_material);
 
-            proton_1.position.x = 0;
-            proton_1.position.y = 2 * 5 * Math.cos(Math.PI / 4);
+            proton_1.position.x = 2 * radius + radius * Math.cos(Math.PI/4);
+            proton_1.position.y = 0;
             proton_1.position.z = 0;
 
-            proton_2.position.x = 0;
+            proton_2.position.x = - 2 * radius - radius * Math.cos(Math.PI/4);
             proton_2.position.y = 0;
-            proton_2.position.z = 2 * 5 * Math.cos(Math.PI / 4);
+            proton_2.position.z = 0;
 
-            proton_3.position.x = 2 * 5 * Math.cos(Math.PI / 4);
-            proton_3.position.y = 0;
+            proton_3.position.x = 0;
+            proton_3.position.y = 2 * radius + radius * Math.sin(Math.PI/4);
             proton_3.position.z = 0;
+            
+            proton_4.position.x = 0;
+            proton_4.position.y = - 2 * radius - radius * Math.sin(Math.PI/4);
+            proton_4.position.z = 0;
+            
+            proton_5.position.x = - 2 * radius * Math.cos(Math.PI/4);
+            proton_5.position.y = 0;
+            proton_5.position.z = 2 * radius * Math.cos(Math.PI/4);
+
+            proton_6.position.x = 0;
+            proton_6.position.y = 0;
+            proton_6.position.z = 2 * radius + radius * Math.sin(Math.PI/4);
+
+            proton_7.position.x = 2 * radius * Math.cos(Math.PI/4);
+            proton_7.position.y = 0;
+            proton_7.position.z = 2 * radius * Math.cos(Math.PI/4);
+
+            proton_8.position.x = radius;
+            proton_8.position.y = 2 * radius * Math.cos(Math.PI/4);
+            proton_8.position.z = 2 * radius * Math.cos(Math.PI/4);
+
+            proton_9.position.x = radius;
+            proton_9.position.y = - 2 * radius * Math.cos(Math.PI/4);
+            proton_9.position.z = 2 * radius * Math.cos(Math.PI/4);
+
+            proton_10.position.x = radius;
+            proton_10.position.y = 2 * radius * Math.cos(Math.PI/4);
+            proton_10.position.z = -2 * radius * Math.cos(Math.PI/4);
+            
+            proton_11.position.x = radius;
+            proton_11.position.y = - 2 * radius * Math.cos(Math.PI/4);
+            proton_11.position.z = - 2 * radius * Math.cos(Math.PI/4);
+
+            proton_12.position.x = radius;
+            proton_12.position.y = radius;
+            proton_12.position.z = 0;
+
+            proton_13.position.x = -radius;
+            proton_13.position.y = -radius;
+            proton_13.position.z = 0;
 
             scene.add(proton_1);
             scene.add(proton_2);
             scene.add(proton_3);
+            scene.add(proton_4);
+            scene.add(proton_5);
+            scene.add(proton_6);
+            scene.add(proton_7);
+            scene.add(proton_8);
+            scene.add(proton_9);
+            scene.add(proton_10);
+            scene.add(proton_11);
+            scene.add(proton_12);
+            scene.add(proton_13);
         });
         
         // Create the neutrons
         loader.load("./textures/neutron.jpg", texture => {
-            const neutron_geometry = new THREE.SphereGeometry(5, 50, 50);
+            const radius = 1.5;
+            const neutron_geometry = new THREE.SphereGeometry(radius, 50, 50);
             const neutron_material = new THREE.MeshBasicMaterial({ map: texture });
 
             const neutron_1 = new THREE.Mesh(neutron_geometry, neutron_material); 
             const neutron_2 = new THREE.Mesh(neutron_geometry, neutron_material); 
             const neutron_3 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_4 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_5 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_6 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_7 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_8 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_9 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_10 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_11 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_12 = new THREE.Mesh(neutron_geometry, neutron_material); 
+            const neutron_13 = new THREE.Mesh(neutron_geometry, neutron_material);
+            const neutron_14 = new THREE.Mesh(neutron_geometry, neutron_material); 
 
-            neutron_1.position.x = 0;
-            neutron_1.position.y = - 2 * 5 * Math.cos(Math.PI / 4);
+            neutron_1.position.x = 2 * radius * Math.cos(Math.PI/4);
+            neutron_1.position.y = 2 * radius * Math.sin(Math.PI/4);
             neutron_1.position.z = 0;
 
-            neutron_2.position.x = 0;
-            neutron_2.position.y = 0;
-            neutron_2.position.z = - 2 * 5 * Math.cos(Math.PI / 4);
+            neutron_2.position.x = -2 * radius * Math.cos(Math.PI/4);
+            neutron_2.position.y = 2 * radius * Math.cos(Math.PI/4);
+            neutron_2.position.z = 0;
 
-            neutron_3.position.x = - 2 * 5 * Math.cos(Math.PI / 4);
-            neutron_3.position.y = 0;
+            neutron_3.position.x = - 2 * radius * Math.cos(Math.PI/4);
+            neutron_3.position.y = - 2 * radius * Math.cos(Math.PI/4);
             neutron_3.position.z = 0;
+
+            neutron_4.position.x = 2 * radius * Math.cos(Math.PI/4);
+            neutron_4.position.y = - 2 * radius * Math.cos(Math.PI/4);
+            neutron_4.position.z = 0;
+
+            neutron_5.position.x = - 2 * radius * Math.cos(Math.PI/4);
+            neutron_5.position.y = 0;
+            neutron_5.position.z = - 2 * radius * Math.cos(Math.PI/4);
+
+            neutron_6.position.x = 0;
+            neutron_6.position.y = 0;
+            neutron_6.position.z = - 2 * radius - radius * Math.sin(Math.PI/4);
+
+            neutron_7.position.x = 2 * radius * Math.cos(Math.PI/4);
+            neutron_7.position.y = 0;
+            neutron_7.position.z = - 2 * radius * Math.cos(Math.PI/4);
+
+            neutron_8.position.x = - radius;
+            neutron_8.position.y = 2 * radius * Math.cos(Math.PI/4);
+            neutron_8.position.z = 2 * radius * Math.cos(Math.PI/4);
+
+            neutron_9.position.x = - radius;
+            neutron_9.position.y = - 2 * radius * Math.cos(Math.PI/4);
+            neutron_9.position.z = 2 * radius * Math.cos(Math.PI/4);
+
+            neutron_10.position.x = - radius;
+            neutron_10.position.y = 2 * radius * Math.cos(Math.PI/4);
+            neutron_10.position.z = - 2 * radius * Math.cos(Math.PI/4);
+
+            neutron_11.position.x = - radius;
+            neutron_11.position.y = - 2 * radius * Math.cos(Math.PI/4);
+            neutron_11.position.z = - 2 * radius * Math.cos(Math.PI/4);
+
+            neutron_12.position.x = radius;
+            neutron_12.position.y = -radius;
+            neutron_12.position.z = 0;
+
+            neutron_13.position.x = - radius;
+            neutron_13.position.y = radius;
+            neutron_13.position.z = 0;
+
+            neutron_14.position.x = 0;
+            neutron_14.position.y = 0;
+            neutron_14.position.z = 0;
 
             scene.add(neutron_1);
             scene.add(neutron_2);
             scene.add(neutron_3);
+            scene.add(neutron_4);
+            scene.add(neutron_5);
+            scene.add(neutron_6);
+            scene.add(neutron_7);
+            scene.add(neutron_8);
+            scene.add(neutron_9);
+            scene.add(neutron_10);
+            scene.add(neutron_11);
+            scene.add(neutron_12);
+            scene.add(neutron_13);
+            scene.add(neutron_14);
         });
 
         //Create electrons
         var cover = new THREE.MeshNormalMaterial();
-        var electron_geometry = new THREE.SphereGeometry(5, 100, 100);
+        var electron_geometry = new THREE.SphereGeometry(2, 100, 100);
         
+
         var electron1 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron1);
-        electron1.position.set(-20,20,0);
+        electron1.position.set(-5,5,0);
 
         var electron2 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron2);
-        electron2.position.set(20,-20,0);
+        electron2.position.set(5,-5,0);
         
         var electron3 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron3);
-        electron3.position.set(30,30,0);
+        electron3.position.set(10.5,10.5,0);
 
         var electron4 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron4);
-        electron4.position.set(0,0,30);
+        electron4.position.set(0,0,10.5);
 
         var electron5 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron5);
-        electron5.position.set(-30,-30,0);
+        electron5.position.set(-10.5,-10.5,0);
 
         var electron6 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron6);
-        electron6.position.set(0,0,-30);
+        electron6.position.set(0,0,-10.5);
         
         var electron7 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron7);
-        electron7.position.set(Math.cos(18)*30, Math.cos(18)*30, Math.sin(18)*30);
+        electron7.position.set(Math.cos(18)*10.5, Math.cos(18)*10.5, Math.sin(18)*10.5);
         
         var electron8 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron8);
-        electron8.position.set(-Math.cos(18)*30, -Math.cos(18)*30, -Math.sin(18)*30);
+        electron8.position.set(-Math.cos(18)*10.5, -Math.cos(18)*10.5, -Math.sin(18)*10.5);
         
         var electron9 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron9);
-        electron9.position.set(Math.cos(18)*30, Math.cos(18)*30, -Math.sin(18)*30);
+        electron9.position.set(Math.cos(18)*10.5, Math.cos(18)*10.5, -Math.sin(18)*10.5);
         
         var electron10 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron10);
-        electron10.position.set(-Math.cos(18)*30, -Math.cos(18)*30, Math.sin(18)*30);
+        electron10.position.set(-Math.cos(18)*10.5, -Math.cos(18)*10.5, Math.sin(18)*10.5);
         
         var v_electron1 = new THREE.Mesh(electron_geometry, cover);
         scene.add(v_electron1);
-        v_electron1.position.set(Math.cos(18)*40, 0, Math.sin(18)*40);
+        v_electron1.position.set(Math.cos(18)*20, 0, Math.sin(18)*20);
 
         var v_electron2 = new THREE.Mesh(electron_geometry, cover);
         scene.add(v_electron2);
-        v_electron2.position.set(-Math.cos(18)*40, 0, Math.sin(18)*40);
+        v_electron2.position.set(-Math.cos(18)*20, 0, Math.sin(18)*20);
 
         var v_electron3 = new THREE.Mesh(electron_geometry, cover);
         scene.add(v_electron3);
-        v_electron3.position.set(0, 0, 40);
+        v_electron3.position.set(0, 0, 20);
         
-        
-        // renderer.render(scene, camera);
         
         // Create an animation
         var clock = new THREE.Clock();
+        var camera_pos = 75
 
         var animate = function() {
             requestAnimationFrame(animate);
             var t = clock.getElapsedTime();
             //Position = cos(time + position in radians) * radius
-            v_electron1.position.x = Math.cos((t*2) + 4.18879) * 40;
-            v_electron1.position.z = Math.sin((t*2) + 4.18879) * 40;
+            v_electron1.position.x = Math.cos((t*2) + 4.18879) * 20;
+            v_electron1.position.z = Math.sin((t*2) + 4.18879) * 20;
             
-            v_electron2.position.x = Math.cos(2*t) * 40;
-            v_electron2.position.z = Math.sin(2*t) * 40;
+            v_electron2.position.x = Math.cos(2*t) * 20;
+            v_electron2.position.z = Math.sin(2*t) * 20;
 
-            v_electron3.position.x = Math.cos((2*t) + 1.5708) * 40;
-            v_electron3.position.z = Math.sin((2*t) + 1.5708) * 40;
+            v_electron3.position.x = Math.cos((2*t) + 1.5708) * 20;
+            v_electron3.position.z = Math.sin((2*t) + 1.5708) * 20;
             
             
             if (window.isLeftDown) {
-                camera.position.x = - 100 * Math.cos(theta);
+                camera.position.x = - camera_pos * Math.cos(theta);
                 camera.position.y = camera.position.y;
-                camera.position.z = - 100 * Math.sin(theta);
+                camera.position.z = - camera_pos * Math.sin(theta);
             }
 
             else if (window.isRightDown) {
-                camera.position.x = 100 * Math.cos(theta);
+                camera.position.x = camera_pos * Math.cos(theta);
                 camera.position.y = camera.position.y;
-                camera.position.z = 100 * Math.sin(theta);
+                camera.position.z = camera_pos * Math.sin(theta);
             }
 
             else if (window.isUpDown) {
                 camera.position.x = camera.position.x; 
-                camera.position.y = 100 * Math.sin(theta);
-                camera.position.z = 100 * Math.cos(theta);
+                camera.position.y = camera_pos * Math.sin(theta);
+                camera.position.z = camera_pos * Math.cos(theta);
             }
 
             else if (window.isDownDown) {
                 camera.position.x = camera.position.x; 
-                camera.position.y = - 100 * Math.sin(theta);
-                camera.position.z = - 100 * Math.cos(theta);
+                camera.position.y = - camera_pos * Math.sin(theta);
+                camera.position.z = - camera_pos * Math.cos(theta);
             }
 
             camera.lookAt(scene.position);
