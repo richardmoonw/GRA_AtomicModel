@@ -6,7 +6,8 @@
     <title>Atomic Model</title>
     <link rel="stylesheet" href="css/main.css">
     <!-- Import Threejs -->
-    <script type="text/javascript" src="three.js-master/build/three.js"></script>
+    <script src="three.js-master/build/three.js"></script>
+    <script src="three.js-master/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
 
@@ -21,10 +22,17 @@
         // Create the scene
         var scene = new THREE.Scene();
         
-        const light = new THREE.PointLight( 0xffffff, 10, 2);
-        light.position.set( 0, 20, 0 );
-        scene.add( light );
-        var theta = 0;
+        const light = new THREE.DirectionalLight( 0xdddddd, 1);
+        light.position.set(50, 50, 50);
+        scene.add(light);
+
+        const light_2 = new THREE.DirectionalLight( 0xdddddd, 1);
+        light_2.position.set(-50, 50, -50);
+        scene.add(light_2);
+
+        // Helper to see the lights
+        // const helper = new THREE.DirectionalLightHelper( light, 5 );
+        // scene.add( helper );
 
         // Add a texture to the background
         const loader = new THREE.TextureLoader();
@@ -47,11 +55,13 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
         // Create the protons
         loader.load("./textures/proton.jpg", texture => {
             const radius = 1.5;
             const proton_geometry = new THREE.SphereGeometry(radius, 50, 50);
-            const proton_material = new THREE.MeshBasicMaterial({ map: texture });
+            const proton_material = new THREE.MeshPhongMaterial({ map: texture });
 
             const proton_1 = new THREE.Mesh(proton_geometry, proton_material);
             const proton_2 = new THREE.Mesh(proton_geometry, proton_material);
@@ -138,7 +148,7 @@
         loader.load("./textures/neutron.jpg", texture => {
             const radius = 1.5;
             const neutron_geometry = new THREE.SphereGeometry(radius, 50, 50);
-            const neutron_material = new THREE.MeshBasicMaterial({ map: texture });
+            const neutron_material = new THREE.MeshPhongMaterial({ map: texture });
 
             const neutron_1 = new THREE.Mesh(neutron_geometry, neutron_material); 
             const neutron_2 = new THREE.Mesh(neutron_geometry, neutron_material); 
@@ -228,9 +238,8 @@
         });
 
         //Create electrons
-        var cover = new THREE.MeshNormalMaterial();
-        var electron_geometry = new THREE.SphereGeometry(2, 100, 100);
-        
+        var cover = new THREE.MeshStandardMaterial();
+        var electron_geometry = new THREE.SphereGeometry(1, 100, 100);
 
         var electron1 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron1);
@@ -242,35 +251,35 @@
         
         var electron3 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron3);
-        electron3.position.set(10.5,10.5,0);
+        electron3.position.set(Math.cos(Math.PI/4)* 13, Math.cos(Math.PI/4) * 13,0);
 
         var electron4 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron4);
-        electron4.position.set(0,0,10.5);
+        electron4.position.set(0,0,13);
 
         var electron5 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron5);
-        electron5.position.set(-10.5,-10.5,0);
+        electron5.position.set(-Math.cos(Math.PI/4)* 13, -Math.cos(Math.PI/4)* 13,0);
 
         var electron6 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron6);
-        electron6.position.set(0,0,-10.5);
+        electron6.position.set(0,0,-13);
         
         var electron7 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron7);
-        electron7.position.set(Math.cos(18)*10.5, Math.cos(18)*10.5, Math.sin(18)*10.5);
+        electron7.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
         
         var electron8 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron8);
-        electron8.position.set(-Math.cos(18)*10.5, -Math.cos(18)*10.5, -Math.sin(18)*10.5);
+        electron8.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
         
         var electron9 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron9);
-        electron9.position.set(Math.cos(18)*10.5, Math.cos(18)*10.5, -Math.sin(18)*10.5);
+        electron9.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
         
         var electron10 = new THREE.Mesh(electron_geometry, cover);
         scene.add(electron10);
-        electron10.position.set(-Math.cos(18)*10.5, -Math.cos(18)*10.5, Math.sin(18)*10.5);
+        electron10.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
         
         var v_electron1 = new THREE.Mesh(electron_geometry, cover);
         scene.add(v_electron1);
@@ -283,15 +292,40 @@
         var v_electron3 = new THREE.Mesh(electron_geometry, cover);
         scene.add(v_electron3);
         v_electron3.position.set(0, 0, 20);
-        
-        
+
+        // Create the energy layers
+        const material = new THREE.MeshBasicMaterial( { color: 0xffffff} );
+
+        const geometry_1 = new THREE.TorusGeometry(7, 0.25, 16, 100 );
+        const geometry_2 = new THREE.TorusGeometry(13, 0.25, 16, 100 );
+        const geometry_3 = new THREE.TorusGeometry(20, 0.25, 16, 100 );
+
+        const torus_1 = new THREE.Mesh(geometry_1, material);
+        const torus_2 = new THREE.Mesh(geometry_2, material);
+        const torus_3 = new THREE.Mesh(geometry_3, material);
+
+        // Second energy layer
+        torus_2.rotateY(-Math.PI/2);
+        torus_2.rotateX(-Math.PI/4);
+
+        // Third energy layer
+        torus_3.rotation.x = Math.PI/2;
+
+        scene.add(torus_1);
+        scene.add(torus_2);
+        scene.add(torus_3);
+
         // Create an animation
         var clock = new THREE.Clock();
         var camera_pos = 75
-
+        
         var animate = function() {
+
             requestAnimationFrame(animate);
             var t = clock.getElapsedTime();
+
+            controls.update();
+
             //Position = cos(time + position in radians) * radius
             v_electron1.position.x = Math.cos((t*2) + 4.18879) * 20;
             v_electron1.position.z = Math.sin((t*2) + 4.18879) * 20;
@@ -301,91 +335,24 @@
 
             v_electron3.position.x = Math.cos((2*t) + 1.5708) * 20;
             v_electron3.position.z = Math.sin((2*t) + 1.5708) * 20;
-            
-            
-            if (window.isLeftDown) {
-                camera.position.x = - camera_pos * Math.cos(theta);
-                camera.position.y = camera.position.y;
-                camera.position.z = - camera_pos * Math.sin(theta);
-            }
-
-            else if (window.isRightDown) {
-                camera.position.x = camera_pos * Math.cos(theta);
-                camera.position.y = camera.position.y;
-                camera.position.z = camera_pos * Math.sin(theta);
-            }
-
-            else if (window.isUpDown) {
-                camera.position.x = camera.position.x; 
-                camera.position.y = camera_pos * Math.sin(theta);
-                camera.position.z = camera_pos * Math.cos(theta);
-            }
-
-            else if (window.isDownDown) {
-                camera.position.x = camera.position.x; 
-                camera.position.y = - camera_pos * Math.sin(theta);
-                camera.position.z = - camera_pos * Math.cos(theta);
-            }
 
             camera.lookAt(scene.position);
 
             renderer.render(scene, camera);
         }
 
-        // Key listeners
-        function handleKeyDown(event) {
-            // Left arrow pressed
-            if (event.keyCode === 37) {
-                theta += 1;
-                window.isLeftDown = true;
-            }
+        window.addEventListener('resize', () => {
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width/height;
+            camera.updateProjectionMatrix;
+        })
 
-            // Right arrow pressed
-            else if (event.keyCode === 39) {
-                theta -= 1;
-                window.isRightDown = true;
-            }
-
-            // Up arrow pressed
-            else if (event.keyCode === 38) {
-                theta += 1;
-                window.isUpDown = true;
-            }
-
-            // Down arrow pressed
-            else if (event.keyCode === 40) {
-                theta -= 1;
-                window.isDownDown = true;
-            }
-        }
-
-        function handleKeyUp(event) {
-            // Left arrow released
-            if (event.keyCode === 37) {
-                window.isLeftDown = false;
-            }
-
-            // Right arrow released
-            else if (event.keyCode === 39) {
-                window.isRightDown = false;
-            }
-
-            // Up arrow released
-            else if (event.keyCode === 38) {
-                window.isUpDown = false;
-            }
-
-            // Down arrow released
-            else if (event.keyCode === 40) {
-                window.isDownDown = false;
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown, false);
-        window.addEventListener('keyup', handleKeyUp, false);
-        
 
         animate();
+
+        
     </script>
 
 </body>
