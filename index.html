@@ -49,7 +49,6 @@
         );
 
         camera.position.z = 75;
-
         // Renderer
         var renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -238,61 +237,54 @@
         });
 
         //Create electrons
-        var cover = new THREE.MeshStandardMaterial();
-        var electron_geometry = new THREE.SphereGeometry(1, 100, 100);
+        var v_electron_1;
+        var v_electron_2;
+        var v_electron_3;
+        loader.load("./textures/electron.jpg", texture => {
+            const radius = 1;
+            const electron_geometry = new THREE.SphereGeometry(radius, 100, 100);
+            const electron_material = new THREE.MeshPhongMaterial({ map: texture });
+            var electron_1 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_2 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_3 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_4 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_5 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_6 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_7 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_8 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_9 = new THREE.Mesh(electron_geometry, electron_material);
+            var electron_10 = new THREE.Mesh(electron_geometry, electron_material);
+            
+            v_electron_1 = new THREE.Mesh(electron_geometry, electron_material);
+            v_electron_2 = new THREE.Mesh(electron_geometry, electron_material);
+            v_electron_3 = new THREE.Mesh(electron_geometry, electron_material);
 
-        var electron1 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron1);
-        electron1.position.set(-5,5,0);
+            scene.add(electron_1);
+            scene.add(electron_2);
+            scene.add(electron_3);
+            scene.add(electron_4);
+            scene.add(electron_5);
+            scene.add(electron_6);
+            scene.add(electron_7);
+            scene.add(electron_8);
+            scene.add(electron_9);
+            scene.add(electron_10);
+            scene.add(v_electron_1);
+            scene.add(v_electron_2);
+            scene.add(v_electron_3);
 
-        var electron2 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron2);
-        electron2.position.set(5,-5,0);
+            electron_1.position.set(-5,5,0);
+            electron_2.position.set(5,-5,0);
+            electron_3.position.set(Math.cos(Math.PI/4)* 13, Math.cos(Math.PI/4) * 13,0);
+            electron_4.position.set(0,0,13);
+            electron_5.position.set(-Math.cos(Math.PI/4)* 13, -Math.cos(Math.PI/4)* 13,0);
+            electron_6.position.set(0,0,-13);
+            electron_7.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
+            electron_8.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
+            electron_9.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
+            electron_10.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
+        });
         
-        var electron3 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron3);
-        electron3.position.set(Math.cos(Math.PI/4)* 13, Math.cos(Math.PI/4) * 13,0);
-
-        var electron4 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron4);
-        electron4.position.set(0,0,13);
-
-        var electron5 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron5);
-        electron5.position.set(-Math.cos(Math.PI/4)* 13, -Math.cos(Math.PI/4)* 13,0);
-
-        var electron6 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron6);
-        electron6.position.set(0,0,-13);
-        
-        var electron7 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron7);
-        electron7.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
-        
-        var electron8 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron8);
-        electron8.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
-        
-        var electron9 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron9);
-        electron9.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
-        
-        var electron10 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(electron10);
-        electron10.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
-        
-        var v_electron1 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(v_electron1);
-        v_electron1.position.set(Math.cos(18)*20, 0, Math.sin(18)*20);
-
-        var v_electron2 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(v_electron2);
-        v_electron2.position.set(-Math.cos(18)*20, 0, Math.sin(18)*20);
-
-        var v_electron3 = new THREE.Mesh(electron_geometry, cover);
-        scene.add(v_electron3);
-        v_electron3.position.set(0, 0, 20);
-
         // Create the energy layers
         const material = new THREE.MeshBasicMaterial( { color: 0xffffff} );
 
@@ -326,15 +318,15 @@
 
             controls.update();
 
-            //Position = cos(time + position in radians) * radius
-            v_electron1.position.x = Math.cos((t*2) + 4.18879) * 20;
-            v_electron1.position.z = Math.sin((t*2) + 4.18879) * 20;
+            //Position = cos || sin(time + position in radians) * radius
+            v_electron_1.position.x = Math.cos(2*t) * 20;
+            v_electron_1.position.z = Math.sin(2*t) * 20;
             
-            v_electron2.position.x = Math.cos(2*t) * 20;
-            v_electron2.position.z = Math.sin(2*t) * 20;
+            v_electron_2.position.x = Math.cos((2*t) + (120*Math.PI/180)) * 20;
+            v_electron_2.position.z = Math.sin((2*t) + (120*Math.PI/180)) * 20;
 
-            v_electron3.position.x = Math.cos((2*t) + 1.5708) * 20;
-            v_electron3.position.z = Math.sin((2*t) + 1.5708) * 20;
+            v_electron_3.position.x = Math.cos((2*t) + (240*Math.PI/180)) * 20;
+            v_electron_3.position.z = Math.sin((2*t) + (240*Math.PI/180)) * 20;
 
             camera.lookAt(scene.position);
 
