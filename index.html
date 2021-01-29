@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atomic Model</title>
     <link rel="stylesheet" href="css/main.css">
+
     <!-- Import Threejs -->
     <script src="three.js-master/build/three.js"></script>
     <script src="three.js-master/examples/js/controls/OrbitControls.js"></script>
@@ -22,46 +23,54 @@
         // Create the scene
         var scene = new THREE.Scene();
         
+        // Add light sources to the scene
         const light = new THREE.DirectionalLight( 0xdddddd, 1);
         light.position.set(50, 50, 50);
-        scene.add(light);
 
         const light_2 = new THREE.DirectionalLight( 0xdddddd, 1);
         light_2.position.set(-50, 50, -50);
+
+        scene.add(light);
         scene.add(light_2);
 
-        // Helper to see the lights
+        // Add a helper to see the light sources
         // const helper = new THREE.DirectionalLightHelper( light, 5 );
         // scene.add( helper );
 
-        // Add a texture to the background
+        // Use a texture to have a cool background
         const loader = new THREE.TextureLoader();
         loader.load("./textures/background.jpg", (texture) => {
             scene.background = texture;
         })
 
-        // Add a Perspective Camera
+        // Create a perspective camera and adjust its depth position
         var camera = new THREE.PerspectiveCamera(
             75,                                       // Field of View
             window.innerWidth/window.innerHeight,     // Aspect ratio
             0.1,                                      // Near (default value)
             2000                                      // Far (default value)
         );
-
         camera.position.z = 75;
-        // Renderer
+
+        // Create and set properly the renderer
         var renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        // Create an Orbit Control to have a better control over the camera
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-        // Create the protons
+        // Define the radius for the protons and neutrons
+        const radius = 1.5;
+        
+        // Create the protons' geometry, add them a texture and put them into the scene
         loader.load("./textures/proton.jpg", texture => {
-            const radius = 1.5;
+            
+            // Define the geometry and material of the protons
             const proton_geometry = new THREE.SphereGeometry(radius, 50, 50);
             const proton_material = new THREE.MeshPhongMaterial({ map: texture });
-
+            
+            // Create the required protons
             const proton_1 = new THREE.Mesh(proton_geometry, proton_material);
             const proton_2 = new THREE.Mesh(proton_geometry, proton_material);
             const proton_3 = new THREE.Mesh(proton_geometry, proton_material);
@@ -76,6 +85,7 @@
             const proton_12 = new THREE.Mesh(proton_geometry, proton_material);
             const proton_13 = new THREE.Mesh(proton_geometry, proton_material);
 
+            // Distribute the protons in the scene in order to make the nucleus real
             proton_1.position.x = 2 * radius + radius * Math.cos(Math.PI/4);
             proton_1.position.y = 0;
             proton_1.position.z = 0;
@@ -128,6 +138,7 @@
             proton_13.position.y = -radius;
             proton_13.position.z = 0;
 
+            // Add the protons to the scene
             scene.add(proton_1);
             scene.add(proton_2);
             scene.add(proton_3);
@@ -143,12 +154,14 @@
             scene.add(proton_13);
         });
         
-        // Create the neutrons
+        // Create the neutrons' geometry, add them a texture and put them into the scene
         loader.load("./textures/neutron.jpg", texture => {
-            const radius = 1.5;
+
+            // Define the geometry and material of the neutrons
             const neutron_geometry = new THREE.SphereGeometry(radius, 50, 50);
             const neutron_material = new THREE.MeshPhongMaterial({ map: texture });
 
+            // Create the required neutrons
             const neutron_1 = new THREE.Mesh(neutron_geometry, neutron_material); 
             const neutron_2 = new THREE.Mesh(neutron_geometry, neutron_material); 
             const neutron_3 = new THREE.Mesh(neutron_geometry, neutron_material); 
@@ -164,6 +177,7 @@
             const neutron_13 = new THREE.Mesh(neutron_geometry, neutron_material);
             const neutron_14 = new THREE.Mesh(neutron_geometry, neutron_material); 
 
+            // Distribute the neutrons in the scene in order to make the nucleus real
             neutron_1.position.x = 2 * radius * Math.cos(Math.PI/4);
             neutron_1.position.y = 2 * radius * Math.sin(Math.PI/4);
             neutron_1.position.z = 0;
@@ -220,6 +234,7 @@
             neutron_14.position.y = 0;
             neutron_14.position.z = 0;
 
+            // Add the neutrons to the scene
             scene.add(neutron_1);
             scene.add(neutron_2);
             scene.add(neutron_3);
@@ -236,14 +251,22 @@
             scene.add(neutron_14);
         });
 
-        //Create electrons
+        // Declare the Valence electrons
         var v_electron_1;
         var v_electron_2;
         var v_electron_3;
+
+        // Create the electrons' geometry, add them a texture and put them into the scene
         loader.load("./textures/electron.jpg", texture => {
+
+            // Define the radius for the electrons
             const radius = 1;
+
+            // Define the geometry and material of the neutrons
             const electron_geometry = new THREE.SphereGeometry(radius, 100, 100);
             const electron_material = new THREE.MeshPhongMaterial({ map: texture });
+
+            // Create the required electrons
             var electron_1 = new THREE.Mesh(electron_geometry, electron_material);
             var electron_2 = new THREE.Mesh(electron_geometry, electron_material);
             var electron_3 = new THREE.Mesh(electron_geometry, electron_material);
@@ -259,6 +282,19 @@
             v_electron_2 = new THREE.Mesh(electron_geometry, electron_material);
             v_electron_3 = new THREE.Mesh(electron_geometry, electron_material);
 
+            // Distribute the electrons over the scene in order to form the energy layers
+            electron_1.position.set(-5,5,0);
+            electron_2.position.set(5,-5,0);
+            electron_3.position.set(Math.cos(Math.PI/4)* 13, Math.cos(Math.PI/4) * 13,0);
+            electron_4.position.set(0,0,13);
+            electron_5.position.set(-Math.cos(Math.PI/4)* 13, -Math.cos(Math.PI/4)* 13,0);
+            electron_6.position.set(0,0,-13);
+            electron_7.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
+            electron_8.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
+            electron_9.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
+            electron_10.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
+            
+            // Add the electrons to the scene
             scene.add(electron_1);
             scene.add(electron_2);
             scene.add(electron_3);
@@ -272,42 +308,34 @@
             scene.add(v_electron_1);
             scene.add(v_electron_2);
             scene.add(v_electron_3);
-
-            electron_1.position.set(-5,5,0);
-            electron_2.position.set(5,-5,0);
-            electron_3.position.set(Math.cos(Math.PI/4)* 13, Math.cos(Math.PI/4) * 13,0);
-            electron_4.position.set(0,0,13);
-            electron_5.position.set(-Math.cos(Math.PI/4)* 13, -Math.cos(Math.PI/4)* 13,0);
-            electron_6.position.set(0,0,-13);
-            electron_7.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
-            electron_8.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
-            electron_9.position.set(Math.cos(Math.PI/4)*10.5, Math.cos(Math.PI/4)*10.5, -Math.sin(Math.PI/4)*10.5);
-            electron_10.position.set(-Math.cos(Math.PI/4)*10.5, -Math.cos(Math.PI/4)*10.5, Math.sin(Math.PI/4)*10.5);
         });
         
-        // Create the energy layers
-        const material = new THREE.MeshBasicMaterial( { color: 0xffffff} );
+        // Create the material for the energy layers
+        const layers_material = new THREE.MeshNormalMaterial( { color: 0xffffff} );
 
+        // Define the geometries for the energy layers
         const geometry_1 = new THREE.TorusGeometry(7, 0.25, 16, 100 );
         const geometry_2 = new THREE.TorusGeometry(13, 0.25, 16, 100 );
         const geometry_3 = new THREE.TorusGeometry(20, 0.25, 16, 100 );
+        
+        // Create the energy layers' geometries
+        const torus_1 = new THREE.Mesh(geometry_1, layers_material);
+        const torus_2 = new THREE.Mesh(geometry_2, layers_material);
+        const torus_3 = new THREE.Mesh(geometry_3, layers_material);
 
-        const torus_1 = new THREE.Mesh(geometry_1, material);
-        const torus_2 = new THREE.Mesh(geometry_2, material);
-        const torus_3 = new THREE.Mesh(geometry_3, material);
-
-        // Second energy layer
+        // Rotate the second energy layer
         torus_2.rotateY(-Math.PI/2);
         torus_2.rotateX(-Math.PI/4);
 
-        // Third energy layer
+        // Rotate the third energy layer
         torus_3.rotation.x = Math.PI/2;
 
+        // Add the energy layers into scene
         scene.add(torus_1);
         scene.add(torus_2);
         scene.add(torus_3);
 
-        // Create an animation
+        // Define a timer variable and the depth position of the camera
         var clock = new THREE.Clock();
         var camera_pos = 75
         
@@ -316,9 +344,11 @@
             requestAnimationFrame(animate);
             var t = clock.getElapsedTime();
 
+            // Update the Orbit Controls to animate the change
             controls.update();
 
-            //Position = cos || sin(time + position in radians) * radius
+            // Define the movement of the Valence electrons
+            // Position = cos || sin(time + position in radians) * radius
             v_electron_1.position.x = Math.cos(2*t) * 20;
             v_electron_1.position.z = Math.sin(2*t) * 20;
             
@@ -333,6 +363,7 @@
             renderer.render(scene, camera);
         }
 
+        // Make the whole scene "responsive" to the changes in the window.
         window.addEventListener('resize', () => {
             var width = window.innerWidth;
             var height = window.innerHeight;
@@ -342,9 +373,7 @@
         })
 
 
-        animate();
-
-        
+        animate();     
     </script>
 
 </body>
