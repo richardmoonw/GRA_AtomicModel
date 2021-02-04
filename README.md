@@ -12,7 +12,12 @@ En esta sección se pueden identificar los requerimientos solicitados del proyec
 6. Control interactivo. La cámara se puede mover con la ayuda del mouse. Además se puede hacer zoom in o zoom out con la rueda del ratón.
 
 # Referencias
-Las fuentes que se consultaron para la elaboración de este proyecto están documentadas en el archivo index.html.
+Las fuentes que se consultaron para la elaboración de este proyecto se presentan a continuación:
+1. https://www.youtube.com/channel/UCC7y8uQQXtSxXDGle76HAxw -->
+2. https://stackoverflow.com/questions/13039589/rotate-the-camera-around-an-object-using-the-arrow-keys-in-three-js -->
+3. https://stackoverflow.com/questions/29202091/three-js-keyboard-rotation -->
+4. https://www.youtube.com/watch?v=6oFvqLfRnsU&ab_channel=DesignCourse -->
+5. https://www.aaron-gray.com/three-js-tutorial-building-an-atom/
 
 # Texturas
 Las texturas se encuentran en la carpeta **textures**.
