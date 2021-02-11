@@ -27,10 +27,10 @@ the help of the scroll wheel of the mouse.
 
 # References
 Some research were required in order to achieve the goal of the project, so here is a list of all the used resources: 
-1. https://www.youtube.com/channel/UCC7y8uQQXtSxXDGle76HAxw -->
-2. https://stackoverflow.com/questions/13039589/rotate-the-camera-around-an-object-using-the-arrow-keys-in-three-js -->
-3. https://stackoverflow.com/questions/29202091/three-js-keyboard-rotation -->
-4. https://www.youtube.com/watch?v=6oFvqLfRnsU&ab_channel=DesignCourse -->
+1. https://www.youtube.com/channel/UCC7y8uQQXtSxXDGle76HAxw
+2. https://stackoverflow.com/questions/13039589/rotate-the-camera-around-an-object-using-the-arrow-keys-in-three-js
+3. https://stackoverflow.com/questions/29202091/three-js-keyboard-rotation
+4. https://www.youtube.com/watch?v=6oFvqLfRnsU&ab_channel=DesignCourse
 5. https://www.aaron-gray.com/three-js-tutorial-building-an-atom/
 
 # Textures
