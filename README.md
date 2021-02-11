@@ -16,7 +16,7 @@ The 3D model should be composed by the following elements:
 1. WebGL Scene. For the development of this project the team decided to use [ThreeJs](https://threejs.org/). 
 ThreeJs is a library that runs over WebGL.
 2. Two texures. For this model, some textures for the backgroud, protons, neutrons and electrons were used. 
-The energylayers does not have any texture because the team considered that the material and color chosen 
+The energy layers does not have any texture because the team considered that the chosen material and color 
 look nice. 
 3. A light. The scene has 2 light sources located in the top of it.
 4. A shadow. All the elements in the scene have a shadowed area because there is not direct incidence of the 
@@ -38,11 +38,11 @@ The textures are in the **textures** folder that is in the root of this reposito
 
 # Installation Guide
 For this project to run correctly you need to mount it on an HTTP server. If you don't have it and you open the 
-index.html file in a browser, a Cross-Origin error will raise. Nevertheless. if you want to run the project quickly 
+index.html file in a browser, a Cross-Origin error will raise. Nevertheless, if you want to run the project quickly 
 and without any error, you can follow this guide:
 
 1. Install the [Visual Studio Code](https://code.visualstudio.com/) editor.
-2. Open the recently install program and go to the **extensions** section (usually this can be found in a bar in 
+2. Open the recently installed program and go to the **extensions** section (usually this can be found in a bar in 
 the left side of your screen).
 3. Look for an extension called Live Server (by Ritwick Dey) and install it.
 4. Open this project in Visual Studio Code, right click the index.html and select the "Open with Live Server" 
