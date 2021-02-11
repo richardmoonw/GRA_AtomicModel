@@ -1,36 +1,55 @@
-# Descripción del Proyecto
-Este proyecto consiste en modelo de un átomo de Aluminio en 3D. La representación consiste en el nucleo formado por 13 protones y 14 neutrones, y los 3 niveles de energía con sus 2, 8 y 3 electrones respectivamente.
+# Aluminium Atom (3D Model) Installation and User Guide
+------
 
-# Requerimientos del Proyecto
-En esta sección se pueden identificar los requerimientos solicitados del proyecto, así como también la forma en que se alcanzaron.
+This document gives the instructions to install and run locally a 3D model of an atom of Aluminium. 
+**NOTE:** If you simply run the application by opening the index.html file in a browser, there may be 
+some errors. If you want to see the model without any problem, then you can follow the installation 
+guide provided in this repository. 
 
-1. Escena en WebGL. Para el desarrollo de este proyecto se optó por la utilización de una librería llamada [ThreeJs](https://threejs.org/) que corre sobre WebGL.
-2. Dos texturas. Para este modelo se utilizaron texturas para el fondo, protones, neutrones y electrones. Los niveles de energía carecen de texturas ya que el material y color elegidos lucen bastante bien.
-3. Una luz. La escena cuenta con dos fuentes de luces ubicadas en la parte superior de la escena.
-4. Una sombra. Todos los elementos presentes en la escena cuentan con una región sombreada debido a que la luz no alcanza a incidir en ella.
-5. Animación. Los electrones de Valencia giran sobre el último nivel de energía del átomo.
-6. Control interactivo. La cámara se puede mover con la ayuda del mouse. Además se puede hacer zoom in o zoom out con la rueda del ratón.
+# Project Description
+This project is a 3D representation of an atom of Aluminium. The model has the nucleus of the atom 
+(composed by 13 protons and 14 neutrons), and its 3 energy layers with their 2, 8 and 3 electrons respectively. 
 
-# Referencias
-Las fuentes que se consultaron para la elaboración de este proyecto se presentan a continuación:
+# Requirements
+The 3D model should be composed by the following elements:
+
+1. WebGL Scene. For the development of this project the team decided to use [ThreeJs](https://threejs.org/). 
+ThreeJs is a library that runs over WebGL.
+2. Two texures. For this model, some textures for the backgroud, protons, neutrons and electrons were used. 
+The energylayers does not have any texture because the team considered that the material and color chosen 
+look nice. 
+3. A light. The scene has 2 light sources located in the top of it.
+4. A shadow. All the elements in the scene have a shadowed area because there is not direct incidence of the 
+light sources on them.
+5. Animation. The valence electrons rotate over the last energy layer of the atom.
+6. Interactive control. Camera can be moved with the help of the mouse. Also, you can zoom in or zoom out with 
+the help of the scroll wheel of the mouse.
+
+# References
+Some research were required in order to achieve the goal of the project, so here is a list of all the used resources: 
 1. https://www.youtube.com/channel/UCC7y8uQQXtSxXDGle76HAxw -->
 2. https://stackoverflow.com/questions/13039589/rotate-the-camera-around-an-object-using-the-arrow-keys-in-three-js -->
 3. https://stackoverflow.com/questions/29202091/three-js-keyboard-rotation -->
 4. https://www.youtube.com/watch?v=6oFvqLfRnsU&ab_channel=DesignCourse -->
 5. https://www.aaron-gray.com/three-js-tutorial-building-an-atom/
 
-# Texturas
-Las texturas se encuentran en la carpeta **textures**.
+# Textures
+The textures are in the **textures** folder that is in the root of this repository.
 
-# Guia de Instalacion
-Para poder correr el proyecto se necesita contar con un servidor HTTP. Si no cuentas con uno, al momento de abrir el archivo index.html te marcara un error de Cross-Origin. Sin embargo, si no tienes tiempo para descargar y configurar un servidor, te tenemos la mejor solucion. A continuacion se presenta una serie de pasos que te ayudara a correr este proyecto.
+# Installation Guide
+For this project to run correctly you need to mount it on an HTTP server. If you don't have it and you open the 
+index.html file in a browser, a Cross-Origin error will raise. Nevertheless. if you want to run the project quickly 
+and without any error, you can follow this guide:
 
-1. Instala el editor [Visual Studio Code](https://code.visualstudio.com/).
-2. Abre el programa recien instalado y dirigete a la seccion de extensiones (usualmente esto se encuentra en una barra al lado izquierdo de la pantalla).
-3. Busca la extension llamada Live Server (Ritwick Dey es el autor) e instalala.
-4. Abre este proyecto en Visual Studio Code, dale click derecho al archivo index.html y selecciona la opcion "Open with Live Server". (Si esta opcion no aparece, puedes intentar reiniciando Visual Studio Code y probar este paso nuevamente).
+1. Install the [Visual Studio Code](https://code.visualstudio.com/) editor.
+2. Open the recently install program and go to the **extensions** section (usually this can be found in a bar in 
+the left side of your screen).
+3. Look for an extension called Live Server (by Ritwick Dey) and install it.
+4. Open this project in Visual Studio Code, right click the index.html and select the "Open with Live Server" 
+section (if this option does not appear, try restarting Visual Studio Code and try this step again).
+5. Enjoy the 3D model.
 
-# Uso de la Aplicacion
-La aplicacion te permite hacer lo siguiente:
-1. Rotar el modelo dejando presionado el boton izquierdo del mouse y arrastrandolo en la direccion deseada.
-2. Hacer Zoom In o Zoom Out con la rueda de desplazamiento.
+# User Guide
+You can perform the following actions once you opened the model:
+1. Rotate the model keeping pressed the left click of the mouse and dragging it to the desired direction.
+2. Zoom in or zoom out with the scroll wheel of the mouse.
